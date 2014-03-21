@@ -30,8 +30,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureQueueDemo.UI.Web", "UI
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureQueueDemo.Repository.Interface", "Repository\AzureQueueDemo.Repository.Interface\AzureQueueDemo.Repository.Interface.csproj", "{72BAF3C7-779B-4E85-9132-7384577923E3}"
 EndProject
-Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "AzureQueueDemo.Infrastructure.Cloud", "Infrastructure\AzureQueueDemo.Infrastructure.Cloud\AzureQueueDemo.Infrastructure.Cloud.ccproj", "{DC11C421-6F64-43A8-AFBE-ABC47EFB3831}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureQueueDemo.Repository.Data", "Repository\AzureQueueDemo.Repository.Data\AzureQueueDemo.Repository.Data.csproj", "{A1A1C0B0-45C8-45A8-94F0-A5D8F592D358}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Storage", "Storage", "{CD049F8D-9A75-4EDC-83D9-762C2B5E82B4}"
@@ -39,6 +37,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureQueueDemo.Storage.Interface", "AzureQueueDemo.Storage.Interface\AzureQueueDemo.Storage.Interface.csproj", "{E4992C0C-554F-41E0-83FF-12DE470AA85F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureQueueDemo.Storage.Service", "Storage\AzureQueueDemo.Storage.Service\AzureQueueDemo.Storage.Service.csproj", "{600D5901-3E3D-4FDE-B06F-4568223D9628}"
+EndProject
+Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "AzureQueueDemo.Infrastructure.Cloud", "Infrastructure\AzureQueueDemo.Infrastructure.Cloud\AzureQueueDemo.Infrastructure.Cloud.ccproj", "{7BA5B5DC-298F-45C4-BC42-0A11016551DB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -62,10 +62,6 @@ Global
 		{72BAF3C7-779B-4E85-9132-7384577923E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{72BAF3C7-779B-4E85-9132-7384577923E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{72BAF3C7-779B-4E85-9132-7384577923E3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DC11C421-6F64-43A8-AFBE-ABC47EFB3831}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DC11C421-6F64-43A8-AFBE-ABC47EFB3831}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DC11C421-6F64-43A8-AFBE-ABC47EFB3831}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DC11C421-6F64-43A8-AFBE-ABC47EFB3831}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A1A1C0B0-45C8-45A8-94F0-A5D8F592D358}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A1A1C0B0-45C8-45A8-94F0-A5D8F592D358}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A1A1C0B0-45C8-45A8-94F0-A5D8F592D358}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -78,6 +74,10 @@ Global
 		{600D5901-3E3D-4FDE-B06F-4568223D9628}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{600D5901-3E3D-4FDE-B06F-4568223D9628}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{600D5901-3E3D-4FDE-B06F-4568223D9628}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7BA5B5DC-298F-45C4-BC42-0A11016551DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BA5B5DC-298F-45C4-BC42-0A11016551DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BA5B5DC-298F-45C4-BC42-0A11016551DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BA5B5DC-298F-45C4-BC42-0A11016551DB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -88,7 +88,7 @@ Global
 		{2B840F4A-78B1-4F3C-A332-414AE285CC3F} = {294EA539-98A1-4FB9-8133-F1F1128974C4}
 		{72BAF3C7-779B-4E85-9132-7384577923E3} = {A750D546-5DFD-4D91-AE6C-C6ADAC3A089B}
 		{A1A1C0B0-45C8-45A8-94F0-A5D8F592D358} = {A750D546-5DFD-4D91-AE6C-C6ADAC3A089B}
-		{DC11C421-6F64-43A8-AFBE-ABC47EFB3831} = {8DDB39AB-E2CC-41CD-B5EC-AD43DB47FDAD}
+		{7BA5B5DC-298F-45C4-BC42-0A11016551DB} = {8DDB39AB-E2CC-41CD-B5EC-AD43DB47FDAD}
 		{E4992C0C-554F-41E0-83FF-12DE470AA85F} = {CD049F8D-9A75-4EDC-83D9-762C2B5E82B4}
 		{600D5901-3E3D-4FDE-B06F-4568223D9628} = {CD049F8D-9A75-4EDC-83D9-762C2B5E82B4}
 	EndGlobalSection

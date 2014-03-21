@@ -5,11 +5,11 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>2.2</ProductVersion>
-    <ProjectGuid>dc11c421-6f64-43a8-afbe-abc47efb3831</ProjectGuid>
+    <ProjectGuid>7ba5b5dc-298f-45c4-bc42-0a11016551db</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AspNetMvcWebAndWorkRole</RootNamespace>
-    <AssemblyName>AspNetMvcWebAndWorkRole</AssemblyName>
+    <RootNamespace>AzureQueueDemo.Infrastructure.Cloud</RootNamespace>
+    <AssemblyName>AzureQueueDemo.Infrastructure.Cloud</AssemblyName>
     <StartDevelopmentStorage>True</StartDevelopmentStorage>
     <Name>AzureQueueDemo.Infrastructure.Cloud</Name>
   </PropertyGroup>
@@ -37,17 +37,38 @@
     <ServiceConfiguration Include="ServiceConfiguration.Cloud.cscfg" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="AspNetMvcWebAndWorkRole.WebContent\" />
-    <Folder Include="AzureQueuePatten.WebContent" />
-    <Folder Include="AzureQueueDemo.ComputerContent" />
+    <ProjectReference Include="..\..\Computer\AzureQueueDemo.Computer\AzureQueueDemo.Computer.csproj">
+      <Name>AzureQueueDemo.Computer</Name>
+      <Project>{2b840f4a-78b1-4f3c-a332-414ae285cc3f}</Project>
+      <Private>True</Private>
+      <RoleType>Worker</RoleType>
+      <RoleName>AzureQueueDemo.Computer</RoleName>
+      <UpdateDiagnosticsConnectionStringOnPublish>True</UpdateDiagnosticsConnectionStringOnPublish>
+    </ProjectReference>
+    <ProjectReference Include="..\..\UI\AzureQueueDemo.UI.Web\AzureQueueDemo.UI.Web.csproj">
+      <Name>AzureQueueDemo.UI.Web</Name>
+      <Project>{1656eea7-4ba1-4713-be2c-4c347bbd09e1}</Project>
+      <Private>True</Private>
+      <RoleType>Web</RoleType>
+      <RoleName>AzureQueueDemo.UI.Web</RoleName>
+      <UpdateDiagnosticsConnectionStringOnPublish>True</UpdateDiagnosticsConnectionStringOnPublish>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AspNetMvcWebAndWorkRole.WebContent\diagnostics.wadcfg">
-      <SubType>Content</SubType>
-    </Content>
+    <Folder Include="AzureQueueDemo.ComputerContent\" />
+    <Folder Include="AzureQueueDemo.UI.WebContent\" />
+    <Folder Include="Profiles" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="AzureQueueDemo.ComputerContent\diagnostics.wadcfg">
       <SubType>Content</SubType>
     </Content>
+    <Content Include="AzureQueueDemo.UI.WebContent\diagnostics.wadcfg">
+      <SubType>Content</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <PublishProfile Include="Profiles\queueservicetestProduction.azurePubxml" />
   </ItemGroup>
   <!-- Import the target files for this project template -->
   <PropertyGroup>

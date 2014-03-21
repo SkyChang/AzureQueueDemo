@@ -1,5 +1,6 @@
 ﻿using AzureQueueDemo.Core.Models;
 using AzureQueueDemo.Storage.Service;
+using AzureQueueDemo.Storage.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,19 @@ namespace AzureQueueDemo.UI.Web.Controllers.Api
 {
     public class OrderController : ApiController
     {
+        private IQueueSevice _queueService;
+
+        public OrderController(IQueueSevice s)
+        {
+            _queueService = s;
+        }
+
+        public OrderController()
+            :this(new QueueService())
+        {
+
+        }
+
         // GET api/order
         public IEnumerable<string> Get()
         {
@@ -28,8 +42,7 @@ namespace AzureQueueDemo.UI.Web.Controllers.Api
         [ResponseType(typeof(Order))]
         public IHttpActionResult PostOrder(Order value)
         {
-            SearchTaskPUProxy PUProxy = new SearchTaskPUProxy();
-            PUProxy.QueueJob(value);
+            _queueService.SaveQueue(value);
             return CreatedAtRoute("DefaultApi", new { id = value.Id }, value);
         
         }

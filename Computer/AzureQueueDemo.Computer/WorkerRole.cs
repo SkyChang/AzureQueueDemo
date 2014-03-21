@@ -15,12 +15,13 @@ using System.Runtime.Serialization.Json;
 using Microsoft.AspNet.SignalR.Client;
 using AzureQueueDemo.Repository.Data;
 using AzureQueueDemo.Core.Models;
+using AzureQueueDemo.Repository.Interface;
 
-namespace DBRepoWorkerRole.Computer
+namespace AzureQueueDemo.Computer
 {
     public class WorkerRole : RoleEntryPoint
     {
-        private UnitOfWork _uow;
+        private IUnitOfWork _uow;
 
         //Service Bus Queue
         private const string _QueueName = "Study4Queue";
@@ -34,7 +35,7 @@ namespace DBRepoWorkerRole.Computer
         private ManualResetEvent _completedEvent = new ManualResetEvent(false);
 
         object synRoot = new object();
-        private string _mRoleId = "";
+
         public override void Run()
         {
             _qClient.OnMessage((receivedMessage) =>
@@ -42,29 +43,23 @@ namespace DBRepoWorkerRole.Computer
                 Order order = null;
                 try
                 {
-                    _qMessage = receivedMessage; //Save the current message because we may need to extend the lock on it.
-                    DataContractJsonSerializer jsonSer = new DataContractJsonSerializer(typeof(Order));
+                    //Save the current message because we may need to extend the lock on it.
+                    _qMessage = receivedMessage;
+                    DataContractJsonSerializer jsonSer = 
+                        new DataContractJsonSerializer(typeof(Order));
                     order = receivedMessage.GetBody<Order>(jsonSer);
-
-                    //Invoke business logic
-                    //bool ret = mProcessingUnits.Process(task, RoleEnvironment.GetLocalResource("LocalStorage").RootPath,
-                    //    CloudConfigurationManager.GetSetting("BOVWebSite"));
 
                     _uow.Repository<Order>().Insert(order);
                     _uow.Save();
 
                     lock (synRoot)
                     {
+                        //Reinitialize SignalR Hub proxy.
                         if (mHubConnection == null)
-                            initializeSignalRClient();  //Reinitialize SignalR Hub proxy.
+                            initializeSignalRClient();  
                     }
                     try
                     {
-                        //Send message to SignalR Hub.
-                        //string messageToSend = "";
-                        //if (!string.IsNullOrEmpty(order.Name))
-                        //    messageToSend = "Worker Role [" + "1" + "]: " + messageToSend;
-
                         mHubProxy.Invoke("Send", new object[] { order });
                     }
                     catch
@@ -86,8 +81,6 @@ namespace DBRepoWorkerRole.Computer
                     }
 
                     receivedMessage.Complete();
-                    //Make the message as completed
-                    //_qMessage.Complete();
                 }
                 catch (Exception ex)
                 {
@@ -110,15 +103,6 @@ namespace DBRepoWorkerRole.Computer
             ServicePointManager.DefaultConnectionLimit = 12;
             _uow = new UnitOfWork();
 
-            _mRoleId = RoleEnvironment.CurrentRoleInstance.Id;
-            if (_mRoleId.IndexOf('-') > 0)
-                _mRoleId = _mRoleId.Substring(_mRoleId.LastIndexOf('-') + 1);
-            else if (_mRoleId.IndexOf('.') > 0)
-                _mRoleId = _mRoleId.Substring(_mRoleId.LastIndexOf('.') + 1);
-
-
-            //string storageConnectionString = CloudConfigurationManager.GetSetting("StorageAccount");
-
             //Create the queue if it does not exist already
             string connectionString = CloudConfigurationManager.GetSetting("Microsoft.ServiceBus.ConnectionString");
             var namespaceManager = NamespaceManager.CreateFromConnectionString(connectionString);
@@ -130,17 +114,13 @@ namespace DBRepoWorkerRole.Computer
             //Initialize the connection to Service Bus Queue
             _qClient = QueueClient.CreateFromConnectionString(connectionString, _QueueName);
 
-            //Set up Processing Units
-            //mProcessingUnits = new SearchTaskProcessingUnits(storageConnectionString, "inputncbi", "ncbi");
-            //mProcessingUnits.SearchTaskStatechanged += mProcessingUnits_SearchTaskStatechanged;
-
             return base.OnStart();
         }
 
         private void initializeSignalRClient()
         {
             //mHubConnection = new HubConnection(CloudConfigurationManager.GetSetting("HubAddress"));
-            mHubConnection = new HubConnection("http://127.0.0.1/signalr",useDefaultUrl:false);
+            mHubConnection = new HubConnection("http://127.0.0.1/signalr", useDefaultUrl: false);
             
             mHubProxy = mHubConnection.CreateHubProxy("MessageHub");
             mHubConnection.Start().Wait();

@@ -1,19 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ServiceConfiguration serviceName="AzureQueueDemo" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="3" osVersion="*" schemaVersion="2013-10.2.2">
-  <Role name="AzureQueueDemo.Web">
+<ServiceConfiguration serviceName="AzureQueueDemo.Infrastructure.Cloud" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="3" osVersion="*" schemaVersion="2013-10.2.2">
+  <Role name="AzureQueueDemo.UI.Web">
     <Instances count="1" />
     <ConfigurationSettings>
       <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="UseDevelopmentStorage=true" />
       <Setting name="Microsoft.ServiceBus.ConnectionString"
-                      value="Endpoint=sb://study4.servicebus.windows.net/;SharedSecretIssuer=owner;SharedSecretValue=eNmWsDvBZ8TzN7X6PR4ArJfdAppTiHAFNoBL/FGBY3I=" />
+                       value="Endpoint=sb://study4.servicebus.windows.net/;SharedSecretIssuer=owner;SharedSecretValue=eNmWsDvBZ8TzN7X6PR4ArJfdAppTiHAFNoBL/FGBY3I=" />
     </ConfigurationSettings>
   </Role>
-  <Role name="DBRepoWorkerRole">
+  <Role name="AzureQueueDemo.Computer">
     <Instances count="1" />
     <ConfigurationSettings>
       <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="UseDevelopmentStorage=true" />
       <Setting name="Microsoft.ServiceBus.ConnectionString"
-                      value="Endpoint=sb://study4.servicebus.windows.net/;SharedSecretIssuer=owner;SharedSecretValue=eNmWsDvBZ8TzN7X6PR4ArJfdAppTiHAFNoBL/FGBY3I=" />
+                        value="Endpoint=sb://study4.servicebus.windows.net/;SharedSecretIssuer=owner;SharedSecretValue=eNmWsDvBZ8TzN7X6PR4ArJfdAppTiHAFNoBL/FGBY3I=" />
       <Setting name="HubAddress" value="http://127.255.0.0:81/" />
     </ConfigurationSettings>
   </Role>

@@ -1,4 +1,6 @@
 ﻿using AzureQueueDemo.Core.Models;
+using AzureQueueDemo.Repository.Data;
+using AzureQueueDemo.Repository.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +12,19 @@ namespace AzureQueueDemo.UI.Web.Controllers
 {
     public class HomeController : Controller
     {
+        private IUnitOfWork _uowForRead;
+
+        public HomeController(UnitOfWorkForRead s)
+        {
+            _uowForRead = s;
+        }
+
+        public HomeController()
+            : this(new UnitOfWorkForRead())
+        {
+
+        }
+
         // GET: /Home/
         public ActionResult Index()
         {
@@ -18,12 +33,7 @@ namespace AzureQueueDemo.UI.Web.Controllers
 
         public ActionResult Read()
         {
-            //DBContextForRead db = new DBContextForRead();
-            //UnitOfWorkForRead _uow = new UnitOfWorkForRead();
-            
-            //return View(_uow.Repository<Order>().Get());
-            return View();
-        
+            return View(_uowForRead.Repository<Order>().Get());
         }
 
 	}

@@ -8,22 +8,18 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width"/>
-    <title>Index</title>
+    <title>大麥手機!!</title>
 </head>
 <body>
     <div>
+        <h1>大麥手機</h1>
         <form action="~/home/Create" method="post">
+            <label for="name">訂購者</label>
             <input type="text" id="name" name="name" />
             <button type="button" id="btn">Order!</button>
         </form>
-        <span id="test"></span>
+        <span id="successMessage"></span>
     </div>
-    @*<div>
-        <img id="bg" src="http://s3.sopili.com/apps/generator/web1/bg.jpg">
-        <div id="title">破解日</div>
-        <div id="birth">103 年 3 月 22 日</div>
-    </div>
-    <a href="http://tw.piliapp.com/generator/web1/">http://tw.piliapp.com/generator/web1/</a>*@
 </body>
 </html>
 
@@ -37,7 +33,7 @@
         $('#btn').click(function () {
             $.ajax({
                 type: 'POST',
-                url: "api/Order",
+                url: "/api/Order",
                 data: { name: $("#name").val(), connectionID: $.connection.hub.id },
                 success: function () {
                     alert("已送出");
@@ -50,8 +46,9 @@
     var msgHub = $.connection.messageHub;
     var flag = false;
 
-    msgHub.client.broadcastMessage = function (message) {
-        alert(message);
+    msgHub.client.successMessage = function (message) {
+        alert(message + "您好，訂單已經送出");
+        $("#successMessage").val(message + "您好，訂單已經送出");
     };
 
 </script>

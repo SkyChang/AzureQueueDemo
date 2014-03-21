@@ -12,8 +12,7 @@ namespace AzureQueueDemo.UI.Web
     {
         public void Send(Order value)
         {
-            //Clients.All.broadcastMessage(message);
-            Clients.Client(value.ConnectionID).broadcastMessage(value.Name);
+            Clients.Client(value.ConnectionID).successMessage(value.Name);
         }
     }
 }

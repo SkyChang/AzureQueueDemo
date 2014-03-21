@@ -70,25 +70,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="QueueHelper.cs" />
-    <Compile Include="SearchTaskPUProxy.cs" />
+    <Compile Include="QueueService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\AzureQueueDemo.Storage.Interface\AzureQueueDemo.Storage.Interface.csproj">
+      <Project>{e4992c0c-554f-41e0-83ff-12de470aa85f}</Project>
+      <Name>AzureQueueDemo.Storage.Interface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Core\AzureQueueDemo.Core.Models\AzureQueueDemo.Core.Models.csproj">
       <Project>{934d3472-c8b2-4b71-b07d-8881336c86f4}</Project>
       <Name>AzureQueueDemo.Core.Models</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Repository\AzureQueueDemo.Repository.Data\AzureQueueDemo.Repository.Data.csproj">
-      <Project>{a1a1c0b0-45c8-45a8-94f0-a5d8f592d358}</Project>
-      <Name>AzureQueueDemo.Repository.Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Repository\AzureQueueDemo.Repository.Interface\AzureQueueDemo.Repository.Interface.csproj">
-      <Project>{72baf3c7-779b-4e85-9132-7384577923e3}</Project>
-      <Name>AzureQueueDemo.Repository.Interface</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

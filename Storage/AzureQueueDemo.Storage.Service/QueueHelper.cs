@@ -12,14 +12,14 @@ using System.Web;
 
 namespace AzureQueueDemo.Storage.Service
 {
-    public class QueueHelper
+    public class QueueHelperA
     {
         private CloudQueueClient _queueClient;
         private IUnitOfWork _repository;
 
         private static readonly string queueName = "skyorder";
 
-        public QueueHelper(IUnitOfWork repository)
+        public QueueHelperA(IUnitOfWork repository)
         {
             _repository = repository;
             CloudStorageAccount storageAccount = CloudStorageAccount.Parse(CloudConfigurationManager.GetSetting("StorageConnection"));
