@@ -1,0 +1,57 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width"/>
+    <title>Index</title>
+</head>
+<body>
+    <div>
+        <form action="~/home/Create" method="post">
+            <input type="text" id="name" name="name" />
+            <button type="button" id="btn">Order!</button>
+        </form>
+        <span id="test"></span>
+    </div>
+    @*<div>
+        <img id="bg" src="http://s3.sopili.com/apps/generator/web1/bg.jpg">
+        <div id="title">破解日</div>
+        <div id="birth">103 年 3 月 22 日</div>
+    </div>
+    <a href="http://tw.piliapp.com/generator/web1/">http://tw.piliapp.com/generator/web1/</a>*@
+</body>
+</html>
+
+<script src="~/Scripts/jquery-2.1.0.min.js"></script>
+<script src="~/Scripts/jquery.signalR-2.0.2.min.js"></script>
+<script src="~/signalr/hubs"></script>
+<script>
+
+    $.connection.hub.url = "/signalr";
+    $.connection.hub.start().done(function () {
+        $('#btn').click(function () {
+            $.ajax({
+                type: 'POST',
+                url: "api/Order",
+                data: { name: $("#name").val(), connectionID: $.connection.hub.id },
+                success: function () {
+                    alert("已送出");
+                },
+                dataType: "json"
+            });
+        });
+    });
+    
+    var msgHub = $.connection.messageHub;
+    var flag = false;
+
+    msgHub.client.broadcastMessage = function (message) {
+        alert(message);
+    };
+
+</script>
